@@ -33,9 +33,7 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        val userRepository = UserRepository()
-        val emailService = EmailService()
-        val userRegistrationService = UserRegistrationService(userRepository, emailService)
+        val userRegistrationService = DaggerUserRegistrationComponent.builder().build().getUserRegistrationService()
         userRegistrationService.registerUser("sheenal@gmail.com","abcde")
     }
 
