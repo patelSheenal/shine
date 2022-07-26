@@ -10,11 +10,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.example.daggerexample.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    @Inject lateinit var userRegistrationService: UserRegistrationService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,9 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        val userRegistrationService = DaggerUserRegistrationComponent.builder().build().getUserRegistrationService()
+        val component = DaggerUserRegistrationComponent.builder().build()
+        //val userRegistrationService = component.getUserRegistrationService()
+        component.inject(this)
         userRegistrationService.registerUser("sheenal@gmail.com","abcde")
     }
 
