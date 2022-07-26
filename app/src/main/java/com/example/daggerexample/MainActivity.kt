@@ -33,7 +33,9 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        val userRegistrationService = UserRegistrationService()
+        val userRepository = UserRepository()
+        val emailService = EmailService()
+        val userRegistrationService = UserRegistrationService(userRepository, emailService)
         userRegistrationService.registerUser("sheenal@gmail.com","abcde")
     }
 
