@@ -40,13 +40,12 @@ class MainActivity : AppCompatActivity() {
 //        val component = DaggerUserRegistrationComponent.builder()
 //            .notificationServiceModule(NotificationServiceModule(3))
 //            .build()
+        // val component = DaggerUserRegistrationComponent.factory().create(3)
+        // val userRegistrationService = component.getUserRegistrationService()
 
-       // val component = DaggerUserRegistrationComponent.factory().create(3)
-        //val userRegistrationService = component.getUserRegistrationService()
-
-        val component = (application as UserApplication).userRegistrationComponent
-        emailService= component.getEmailService()
-        component.inject(this)
+        val appComponent = (application as UserApplication).appComponent
+        val userRegistrationComponent = DaggerUserRegistrationComponent.factory().create(5, appComponent)
+        userRegistrationComponent.inject(this)
         userRegistrationService.registerUser("sheenal@gmail.com","abcde")
     }
 

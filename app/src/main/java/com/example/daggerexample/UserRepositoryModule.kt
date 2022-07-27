@@ -19,6 +19,7 @@ abstract class UserRepositoryModule {
     }
     As Dagger already knows how to create SQLRepository instance as we have injected so we can use the following
 */
+    @ActivityScope
     @Binds
     abstract fun bindsSQLRepository(sqlRepository: SQLRepository): UserRepository
 
