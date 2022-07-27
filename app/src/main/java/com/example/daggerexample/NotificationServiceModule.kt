@@ -11,8 +11,8 @@ class NotificationServiceModule{
     @ActivityScope
     @MessageQualifier
     @Provides
-    fun getMessageService(): NotificationService {
-        return MessageService(4)
+    fun getMessageService(retryCount: Int): NotificationService {
+        return MessageService(retryCount)
     }
 
     @EmailQualifier
