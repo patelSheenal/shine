@@ -1,5 +1,6 @@
 package com.example.daggerexample
 
+import android.app.Application
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     @Inject lateinit var userRegistrationService: UserRegistrationService
+    lateinit var emailService: EmailService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +37,15 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        val component = DaggerUserRegistrationComponent.builder().build()
+//        val component = DaggerUserRegistrationComponent.builder()
+//            .notificationServiceModule(NotificationServiceModule(3))
+//            .build()
+
+       // val component = DaggerUserRegistrationComponent.factory().create(3)
         //val userRegistrationService = component.getUserRegistrationService()
+
+        val component = (application as UserApplication).userRegistrationComponent
+        emailService= component.getEmailService()
         component.inject(this)
         userRegistrationService.registerUser("sheenal@gmail.com","abcde")
     }
