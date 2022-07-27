@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         // val userRegistrationService = component.getUserRegistrationService()
 
         val appComponent = (application as UserApplication).appComponent
-        val userRegistrationComponent = DaggerUserRegistrationComponent.factory().create(5, appComponent)
+        val userRegistrationComponent = appComponent.getUserRegistrationComponent()
         userRegistrationComponent.inject(this)
         userRegistrationService.registerUser("sheenal@gmail.com","abcde")
     }
